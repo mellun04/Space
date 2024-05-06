@@ -50,7 +50,7 @@
     } }}> </div>
 
   {#each [0,0,0,0,0,0,0] as planet,i}
-    <img style={"padding:"+((i+1 === planet_nr)?"10px":"15px")+" 3px"} src="/dot.png" alt="dot"/>
+    <img style={"padding:"+((i+1 === planet_nr)?"10px":"15px")+" 3px"} src="dot.png" alt="dot"/>
   {/each}
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -106,7 +106,7 @@
     right:40vw;
     min-width: 50px;
     min-height: 50px;
-    background-image: url(arrow-left.png);
+    background-image: url("arrow-left.png");
     background-size: contain;
     transition: transform 0.1s;
   }

@@ -5,7 +5,7 @@
   import { lerp } from 'three/src/math/MathUtils.js';
 
 
-  const earth = useLoader(TextureLoader).load('/earth.jpg')
+  const earth = useLoader(TextureLoader).load('earth.jpg')
   const jupiter = useLoader(TextureLoader).load('/jupiter.jpg')
   const sun = useLoader(TextureLoader).load('/sun.jpg')
   const moon = useLoader(TextureLoader).load('/moon.jpg')

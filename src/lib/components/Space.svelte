@@ -26,8 +26,6 @@
   const mars = useLoader(TextureLoader).load('mars.jpg')
   const uranus = useLoader(TextureLoader).load('uranus.jpg')
 
-  
-
 
   const planet_rad = [0.00157, 1/13, 0.273, 0.532, 1, 4, 11,109]
   const planet_pos = [0, 0.2, 0.8, 2.5, 6, 14, 40, 200]
@@ -86,8 +84,6 @@ on:create={({ ref }) => {  ref.lookAt(pos(cam_x), 0, 0)  }} />
   </T.Mesh>
 
 {/each}
-
-
 
 <T.Mesh
 position = {[0,0,0]}

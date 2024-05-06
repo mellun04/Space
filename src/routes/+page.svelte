@@ -106,7 +106,7 @@
     right:40vw;
     min-width: 50px;
     min-height: 50px;
-    background-image: url("arrow-left.png");
+    background-image: url("/arrow-left.png");
     background-size: contain;
     transition: transform 0.1s;
   }
@@ -117,7 +117,7 @@
     right:40vw;
     min-width: 50px;
     min-height: 50px;
-    background-image: url("/arrow-right.png/");
+    background-image: url("/arrow-right.png");
     background-size: contain;
     transition: transform 0.1s;
   }

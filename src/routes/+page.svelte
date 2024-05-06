@@ -55,7 +55,7 @@
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div id="arrow-right" on:click={()=>{
+  <div id="arrow-right" style="background-image: url('arrow-left.png');"   on:click={()=>{
     if (!moving && planet_nr < 7){
       planet_nr++
       moving = true

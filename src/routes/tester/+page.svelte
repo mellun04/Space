@@ -1,7 +1,0 @@
-
-
-
-
-
-
-<img src="dot.png" >

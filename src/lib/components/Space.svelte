@@ -4,15 +4,29 @@
   import { useLoader } from '@threlte/core'
   import { lerp } from 'three/src/math/MathUtils.js';
 
+  let n = 0
+
+  
+  //function texture_load(url){
+  //  return fetch_data = new Promise(resolve => {
+  //    const data = useLoader(TextureLoader).load(url)
+  //    if ( data ) { resolve ( data ) ; n++;}
+  //  }) ;
+  //}
+
+  //texture_load('/earth.jpg').then( result => {const earth = result})
+  
 
   const earth = useLoader(TextureLoader).load('earth.jpg')
-  const jupiter = useLoader(TextureLoader).load('/jupiter.jpg')
-  const sun = useLoader(TextureLoader).load('/sun.jpg')
-  const moon = useLoader(TextureLoader).load('/moon.jpg')
-  const ceres = useLoader(TextureLoader).load('/ceres.jpg')
-  const neutron = useLoader(TextureLoader).load('/blue_star.jpg')
-  const mars = useLoader(TextureLoader).load('/mars.jpg')
-  const uranus = useLoader(TextureLoader).load('/uranus.jpg')
+  const jupiter = useLoader(TextureLoader).load('jupiter.jpg')
+  const sun = useLoader(TextureLoader).load('sun.jpg')
+  const moon = useLoader(TextureLoader).load('moon.jpg')
+  const ceres = useLoader(TextureLoader).load('ceres.jpg')
+  const neutron = useLoader(TextureLoader).load('blue_star.jpg')
+  const mars = useLoader(TextureLoader).load('mars.jpg')
+  const uranus = useLoader(TextureLoader).load('uranus.jpg')
+
+  
 
 
   const planet_rad = [0.00157, 1/13, 0.273, 0.532, 1, 4, 11,109]
@@ -44,6 +58,7 @@
   })
 </script>
 
+
 <T.PerspectiveCamera
 makeDefault
 position={[pos(cam_x), 0, cam_z]} args = {[50,2, 0.001, 100000]}
@@ -58,22 +73,25 @@ on:create={({ ref }) => {  ref.lookAt(pos(cam_x), 0, 0)  }} />
   position = {[planet_pos[i],0,0]}
   rotation.y={rotation*planet_rot[i]}>
     <T.SphereGeometry args={[rad,128,64]}/>
-    {#if i === 0} <T.MeshBasicMaterial map={$neutron} /> {/if}
-    {#if i === 1} <T.MeshStandardMaterial map={$ceres} /> {/if}
-    {#if i === 2} <T.MeshStandardMaterial map={$moon} /> {/if}
-    {#if i === 3} <T.MeshStandardMaterial map={$mars} /> {/if}
-    {#if i === 4} <T.MeshStandardMaterial map={$earth} /> {/if}
-    {#if i === 5} <T.MeshStandardMaterial map={$uranus} /> {/if}
-    {#if i === 6} <T.MeshStandardMaterial map={$jupiter} /> {/if}
-    {#if i === 7} <T.MeshBasicMaterial map={$sun} /> {/if}
+    
+    {#if i === 0 && $neutron} <T.MeshBasicMaterial map={$neutron} /> {/if}
+    {#if i === 1 && $ceres} <T.MeshStandardMaterial map={$ceres} /> {/if}
+    {#if i === 2 && $moon} <T.MeshStandardMaterial map={$moon} /> {/if}
+    {#if i === 3 && $mars} <T.MeshStandardMaterial map={$mars} /> {/if}
+    {#if i === 4 && $earth} <T.MeshStandardMaterial map={$earth} /> {/if}
+    {#if i === 5 && $uranus} <T.MeshStandardMaterial map={$uranus} /> {/if}
+    {#if i === 6 && $jupiter} <T.MeshStandardMaterial map={$jupiter} /> {/if}
+    {#if i === 7 && $sun} <T.MeshBasicMaterial map={$sun} /> {/if}
     
   </T.Mesh>
 
 {/each}
 
+
+
 <T.Mesh
 position = {[0,0,0]}
 scale = {50000}>
   <T.SphereGeometry/>
-  <T.MeshBasicMaterial map={$stars} side={BackSide}/>
+  {#if $stars} <T.MeshBasicMaterial map={$stars} side={BackSide}/> {/if}
 </T.Mesh>

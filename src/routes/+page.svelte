@@ -32,7 +32,8 @@
 
   <div id="info-tab" style={info_tab?"display:block":"display:none"}>
     <h4 style="margin:0px; color:aliceblue;"> {planets[planet_nr].name} <br> </h4> 
-    {#if planet_nr === 4} The only home we have ever had and the only planet in the universe we know to harbor life. As far as we know it is unique. It hosts a plethora of differnet animals, plants, fungi and prokaryotes including a special species called homo sapiens. With there intelect this species of primates has managed to free themselves from the shakles of space and time and started on the path to descover the cosmos and it laws. This makes them a way for the universe to know itself. {/if}
+    {#if planet_nr === 0} The most voilent and dense object in the known universe thats not a black hole. Neutron stars are formed when a star with a mass 10-25 times the sun dies in a supernova. The core of the star is then compressed by gravity until the nuclei of the atoms literaly touch and all elektrons and protons are converted into neutrons. You end upp with an atomic nucleus the size of a small city but with a mass larger than the sun, and a surface gravity strong enough to bend it's own light around itself. It also rotates stupidly fast, with periods ranging from 30 to 0.001 seconds! {/if}
+    {#if planet_nr === 4} The only home we have ever had and the only planet in the universe we know to harbor life. The middle sized rocky planey hosts a plethora of differnet animals, plants, fungi and prokaryotes including a special species called homo sapiens. With there intelect this species of primates has managed to free themselves from the shakles of space and time and started on the path to descover the cosmos and it laws. This makes them a way for the universe to know itself. {/if}
   </div>
 
 </div>

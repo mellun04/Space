@@ -3,18 +3,6 @@
   import { TextureLoader, BackSide } from 'three'
   import { useLoader } from '@threlte/core'
   import { lerp } from 'three/src/math/MathUtils.js';
-
-  let n = 0
-
-  
-  //function texture_load(url){
-  //  return fetch_data = new Promise(resolve => {
-  //    const data = useLoader(TextureLoader).load(url)
-  //    if ( data ) { resolve ( data ) ; n++;}
-  //  }) ;
-  //}
-
-  //texture_load('/earth.jpg').then( result => {const earth = result})
   
 
   const earth = useLoader(TextureLoader).load('earth.jpg')
@@ -37,7 +25,7 @@
       return lerp(planet_pos[n], planet_pos[n+1], index-n) }
   }
   
-  const stars = useLoader(TextureLoader).load('/stars.jpg')
+  const stars = useLoader(TextureLoader).load('stars.jpg')
   
   export let planet_nr = 0;
   let cam_x = 4;

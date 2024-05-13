@@ -1,6 +1,6 @@
 <script>
   import { T, useTask } from '@threlte/core'
-  import { TextureLoader, BackSide } from 'three'
+  import { TextureLoader, BackSide, PlaneGeometry, MeshBasicMaterial, Mesh } from 'three'
   import { useLoader } from '@threlte/core'
   import { lerp } from 'three/src/math/MathUtils.js';
   
@@ -75,7 +75,8 @@ on:create={({ ref }) => {  ref.lookAt(pos(cam_x), 0, 0)  }} />
 
 <T.Mesh
 position = {[0,0,0]}
-scale = {50000}>
+scale = {10000}
+rotation.x={-0.001*rotation}>
   <T.SphereGeometry/>
   {#if $stars} <T.MeshBasicMaterial map={$stars} side={BackSide}/> {/if}
 </T.Mesh>

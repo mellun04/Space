@@ -91,23 +91,19 @@
   #top{
     padding:5px;
     color:darkcyan;
-    text-overflow:clip;
-    white-space:nowrap;
-    overflow:hidden;
     font-size: 30px;
   }
   @media(max-width:1300px){
     #top{
-    text-overflow:initial;
-    white-space:initial;
-    overflow:initial;
-    font-size: 20px;
+      padding: 2px;
+      font-size: 20px;
     }
   }
   @media(max-width:650px){
     #top{
+    padding: 0px;
     font-size: 12px;
-  }
+    }
   }
 
   #input{

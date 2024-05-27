@@ -114,6 +114,7 @@
   .tab{
     width: 400px;
     max-height:70vh;
+    max-width: 100vw;
     background-color: rgba(70, 70, 70, 0.7);
     padding: 10px;
     color: aliceblue;
@@ -186,7 +187,7 @@
   }
   .weight{
     width: 50vw;
-    height:80vh;
+    height:70vh;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -3,7 +3,13 @@
   import { TextureLoader, BackSide, PlaneGeometry, MeshBasicMaterial, Mesh } from 'three'
   import { useLoader } from '@threlte/core'
   import { lerp } from 'three/src/math/MathUtils.js';
+  import { spring } from 'svelte/motion'
   
+  const cam_tilt = spring(0)
+  cam_tilt.precision = 0.001
+  cam_tilt.damping = 0.1
+  cam_tilt.stiffness = 0.1
+
 
   const earth = useLoader(TextureLoader).load('earth.jpg')
   const jupiter = useLoader(TextureLoader).load('jupiter.jpg')
@@ -28,6 +34,7 @@
   const stars = useLoader(TextureLoader).load('stars.jpg')
   
   export let planet_nr = 0;
+  export let tilt = 0;
   let cam_x = 4;
   let cam_z = 4;
   
@@ -41,13 +48,15 @@
     if(cam_x <= planet_nr){  cam_z *= (planet_rad[planet_nr]/cam_z*4)**(delta*4)  }
     if(cam_x >= planet_nr && cam_x-planet_nr < 0.5){  cam_z *= (planet_rad[planet_nr]/cam_z*4)**(delta)  }
 
+    cam_tilt.set(tilt)
   })
 </script>
 
 
 <T.PerspectiveCamera
 makeDefault
-position={[pos(cam_x), 0, cam_z]} args = {[50,2, 0.001, 100000]}
+position={[pos(cam_x), 0, cam_z]}
+args = {[50,2, 0.001, 100000]}
 on:create={({ ref }) => {  ref.lookAt(pos(cam_x), 0, 0)  }} />
 
 <T.DirectionalLight position={[0, 0, 30]}/>
@@ -57,7 +66,8 @@ on:create={({ ref }) => {  ref.lookAt(pos(cam_x), 0, 0)  }} />
 
   <T.Mesh
   position = {[planet_pos[i],0,0]}
-  rotation.y={rotation*planet_rot[i]}>
+  rotation.y={rotation*planet_rot[i]}
+  rotation.x = {$cam_tilt}>
     <T.SphereGeometry args={[rad,128,64]}/>
     
     {#if i === 0 && $neutron} <T.MeshBasicMaterial map={$neutron} /> {/if}
@@ -76,7 +86,8 @@ on:create={({ ref }) => {  ref.lookAt(pos(cam_x), 0, 0)  }} />
 <T.Mesh
 position = {[0,0,0]}
 scale = {10000}
-rotation.x={-0.001*rotation}>
+rotation.y={-0.001*rotation}
+rotation.x = {$cam_tilt}>
   <T.SphereGeometry/>
   {#if $stars} <T.MeshBasicMaterial map={$stars} side={BackSide}/> {/if}
 </T.Mesh>

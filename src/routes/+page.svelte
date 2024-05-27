@@ -11,20 +11,36 @@
   const planets = [{name:"A neutron star",g:7*10**11}, {name:"Ceres",g:0.028}, {name:"The moon",g:0.17}, {name:"Mars",g:0.38}, {name:"Earth",g:1}, {name:"Uranus",g:0.92}, {name:"Jupiter",g:2.64}, {name:"The sun",g:28}]
   
   let info_tab = false;
-  let about_tab = false
+  let about_tab = false;
+
+  let tilt = 0
+
+  function wheel(event){
+    if(Math.abs(event.deltaX) > 0.5 && !moving){  move(-Math.sign(event.deltaX), true)  }
+    if(Math.abs(event.deltaY) > 2){ tilt = event.deltaY/50 }else{ tilt = 0}
+  }
+  function move(direction, wheel){
+    if((direction < 0 && planet_nr > 0)||(direction > 0 && planet_nr < 7)){
+      if (!moving){
+        planet_nr += direction
+        moving = true
+        setTimeout(()=>{moving = false}, wheel?1800:1200)
+      }
+    }
+  }
 </script>
 
 
 <div class="nav-bar">
   <button id="drop-down" on:click={()=>{info_tab = !info_tab; about_tab = false}}> Object Info</button>
-  <h1 style="padding:5px; color:darkcyan"> {"How much do you weigh on "+planets[planet_nr].name.toLowerCase()+"?"} </h1>
+  <h1 id="top"> {"How much do you weigh on "+planets[planet_nr].name.toLowerCase()+"?"} </h1>
   <button id="drop-down" on:click={()=>{about_tab = !about_tab; info_tab = false}}> About the website </button>
 </div>
 
 
   <div class="weight">
     <input maxlength=8  type="text" bind:value={weight} id="input" placeholder="Enter weight"/>
-    {#if (weight && !isNaN(weight))}  <h2> {"You would weigh " +Math.round(weight*planets[planet_nr].g*1000)/1000+ " kg!"}</h2>  {/if}
+    {#if (weight && !isNaN(weight))}  <h2 style="font-size:calc(1vw + 10px);"> {"You would weigh " +Math.round(weight*planets[planet_nr].g*1000)/1000+ " kg!"}</h2>  {/if}
   </div>
 
   <div class="tab" class:out={!info_tab} id="info-tab">
@@ -35,8 +51,8 @@
     {#if planet_nr === 3} Also known as the red planet, from all the iron oxide (rust) contained on it's surface. Mars is the second smallest planet in the solar system and it has a day of 24.5 hours and a years equal to 1.88 earth years. Mars has two small potato shaped moons called Phobos and Deimos and hosts the largest mountain in the solar system called Olympus Mons with a height of 21.9 km. Even though the Mars of today is a frozen dessert with a thin atmosphere and surface temperatures between -80 and 5 celsius, there are signs of liquid water existing on the surface in the past and where there is water, there is life. {/if}
     {#if planet_nr === 4} The only home we have ever had and the only planet in the universe we know to harbor life. This middle sized rocky planet hosts a plethora of different animals, plants, fungi and prokaryotes including a special species called homo sapiens. With there intellect this species of primates has managed to free themselves from the shackles of space and time and started on the path to discover the cosmos and it laws. This makes them a way for the universe to know itself. {/if}
     {#if planet_nr === 5} The seventh planet from the sun, the smallest gas giant by mass and the coldest planet in the solar system. It and Neptune is classified as ice giants because of the large amount of water ice they contain. Uranus orbits 2.8 billion kilometers from the sun and has an orbital period of 84 years. One weird aspect of it is its axial tilt of 82 degrees that gives it seasonal changes unlike an other planet, the cause of this is unknown. Uranus was not known to the ancients because of its slow orbit and distance from earth and therefore the first planet to be discovered in 1781, although it had been spotted before. {/if}
-    {#if planet_nr === 6} - {/if}
-    {#if planet_nr === 7} - {/if}
+    {#if planet_nr === 6} The king of the solar system. Jupiter is the fifth planet from the sun and the largest planet in the solar system, more massive than all the other planets combined. This gas giant consists mostly of hydrogen and helium left after the formation of the sun. Despite its huge size jupiter has the fastest rotation rate of all planets in the solar system, completing one rotation every 10 hours. This creates massive coriolis forces driving the biggest storm in the solar system, the great red spot. A storm the size of three Earths that has lasted for more than 400 years. {/if}
+    {#if planet_nr === 7} The true ruler of our solar system making up 99.86% of its total mass. It is a G-type main-sequence star called a yellow dwarf made of mostly hydrogen and helium left over from the big bang. In its core the enormous pressure and temperature  generated from the gravity of this enormous ball of plasma lets hydrogen fuse into helium which releases an enormous amount of energy that powers our planet. This radiation pressure fights against the force of gravity and keeps the star in balance, until it runs out of fuel that is. {/if}
   </div>
 
   <div class="tab" class:out={!about_tab} id="about-tab" >
@@ -46,16 +62,12 @@
   </div>
 
 
-<div class="scroll-bar">
+<div class="bottom-bar">
+<div id="scroll-bar" on:wheel={wheel}>
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div id="arrow-left" on:click={()=>{
-    if (!moving && planet_nr > 0){
-      planet_nr--
-      moving = true
-      setTimeout(()=>{moving = false}, 1200)
-    } }}> </div>
+  <div id="arrow-left" on:click={()=>move(-1, false)}> </div>
 
   {#each [0,0,0,0,0,0,0] as planet,i}
     <img class="dot" class:big={(i+1 === planet_nr)} src="dot.png" alt="dot"/>
@@ -63,24 +75,26 @@
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div id="arrow-right"   on:click={()=>{
-    if (!moving && planet_nr < 7){
-      planet_nr++
-      moving = true
-      setTimeout(()=>{moving = false}, 1200)
-    } }}> </div>
+  <div id="arrow-right"   on:click={()=>move(1, false)}> </div>
 
+</div>
 </div>
 
 <div id="canvas">
   <Canvas>
-  <Space {planet_nr} />
+    <Space {planet_nr} {tilt} />
   </Canvas>
 </div>
 
 
 <style>
-
+  #top{
+    padding:5px;
+    color:darkcyan;
+    text-overflow:clip;
+    white-space:nowrap;
+    overflow:hidden;
+  }
   #input{
     width:170px;
     margin:15px;
@@ -118,6 +132,7 @@
     border-color: rgb(52, 52, 52);
     border-radius: 0;
     border-width: 2px;
+    font-size: calc(1vw + 5px);
   }
   .nav-bar{
     height: 60px;
@@ -125,14 +140,19 @@
     display: flex;
     justify-content: space-between;
   }
-  .scroll-bar{
+  .bottom-bar{
     position: absolute;
     bottom: 20px;
+    width: 100vw;
+    left:0;
+    display: flex;
+    justify-content: space-around;
+  }
+  #scroll-bar{
     width: 20vw;
-    left:40vw;
     height: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
   .dot{
     padding:15px 3px;
@@ -142,7 +162,6 @@
     padding: 10px 3px;
     transform: scale(1.2);
   }
-
   #arrow-left{
     right:40vw;
     min-width: 50px;

@@ -95,19 +95,19 @@
   }
   @media(max-width:900px){
     #top{
-      padding: 10px;
+      padding-top: 10px;
       font-size: 20px;
     }
   }
   @media(max-width:600px){
     #top{
-    padding: 15px;
+    padding-top: 15px;
     font-size: 15px;
     }
   }
   @media(max-width:400px){
     #top{
-    padding: 20px;
+    padding-top: 15px;
     font-size: 10px;
     }
   }

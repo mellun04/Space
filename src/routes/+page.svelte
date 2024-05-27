@@ -94,7 +94,22 @@
     text-overflow:clip;
     white-space:nowrap;
     overflow:hidden;
+    font-size: 30px;
   }
+  @media(max-width:1300px){
+    #top{
+    text-overflow:initial;
+    white-space:initial;
+    overflow:initial;
+    font-size: 20px;
+    }
+  }
+  @media(max-width:650px){
+    #top{
+    font-size: 12px;
+  }
+  }
+
   #input{
     width:170px;
     margin:15px;
@@ -188,6 +203,7 @@
   .weight{
     width: 50vw;
     height:70vh;
+    max-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
     align-items: center;

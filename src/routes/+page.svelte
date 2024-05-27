@@ -93,18 +93,25 @@
     color:darkcyan;
     font-size: 30px;
   }
-  @media(max-width:1300px){
+  @media(max-width:900px){
     #top{
-      padding: 2px;
+      padding: 10px;
       font-size: 20px;
     }
   }
-  @media(max-width:650px){
+  @media(max-width:600px){
     #top{
-    padding: 0px;
-    font-size: 12px;
+    padding: 15px;
+    font-size: 15px;
     }
   }
+  @media(max-width:400px){
+    #top{
+    padding: 20px;
+    font-size: 10px;
+    }
+  }
+
 
   #input{
     width:170px;
@@ -139,7 +146,7 @@
     transform: translateY(-80vh);
   }
   #drop-down{
-    width: 400px;
+    width: 20vw;
     background-color: rgb(70, 70, 70);
     border-color: rgb(52, 52, 52);
     border-radius: 0;

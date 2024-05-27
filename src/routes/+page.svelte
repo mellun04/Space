@@ -16,7 +16,7 @@
   let tilt = 0
 
   function wheel(event){
-    if(Math.abs(event.deltaX) > 0.5 && !moving){  move(-Math.sign(event.deltaX), true)  }
+    if(Math.abs(event.deltaX) > 0.5 && !moving){  move(Math.sign(event.deltaX), true)  }
     if(Math.abs(event.deltaY) > 2){ tilt = event.deltaY/50 }else{ tilt = 0}
   }
   function move(direction, wheel){
@@ -57,7 +57,7 @@
 
   <div class="tab" class:out={!about_tab} id="about-tab" >
     <h4 style="margin:0px; color:aliceblue;"> About the website <br> </h4> 
-    If you know your physics you know that this site isn't entirely correct because weight and mass is different. Mass is measured in kilograms (kg) and is constant, not dependant on the local gravity. Weight is a force and those are measured in newtons (N) and it depends on the gravity around you. But in this site we use these totally different measures interchangeably. <br>
+    If you know your physics you know that this site isn't entirely correct because weight and mass are two separate things. Mass is measured in kilograms (kg) and is constant, not dependant on the local gravity. Weight is a force and those are measured in newtons (N) and it depends on the gravity around you. But in this site we use these totally different measures interchangeably. <br>
     The weights on this website is calculated from the surface gravitys on the diffent celestial bodies realative to the surface gravity on Earth (9.82 m/s^2)
   </div>
 
@@ -107,7 +107,7 @@
   }
   @media(max-width:400px){
     #top{
-    padding-top: 15px;
+    padding-top: 20px;
     font-size: 10px;
     }
   }

@@ -17,7 +17,7 @@
 
   function wheel(event){
     if(Math.abs(event.deltaX) > 0.5 && !moving){  move(Math.sign(event.deltaX), true)  }
-    if(Math.abs(event.deltaY) > 2){ tilt = event.deltaY/50 }else{ tilt = 0}
+    if(Math.abs(event.deltaY) > 2){ tilt = -event.deltaY/50 }else{ tilt = 0}
   }
   function move(direction, wheel){
     if((direction < 0 && planet_nr > 0)||(direction > 0 && planet_nr < 7)){
@@ -70,7 +70,7 @@
   <div id="arrow-left" on:click={()=>move(-1, false)}> </div>
 
   {#each [0,0,0,0,0,0,0] as planet,i}
-    <img class="dot" class:big={(i+1 === planet_nr)} src="dot.png" alt="dot"/>
+    <img class="dot" class:big={(i+1 === planet_nr)} src="dot.png" alt="dot" on:click={()=>{planet_nr=i+1}}/>
   {/each}
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
